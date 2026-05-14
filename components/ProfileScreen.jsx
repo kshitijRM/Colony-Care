@@ -4,11 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PRIMARY, ACCENT, CARD, SUCCESS, WARNING, DANGER, SECONDARY, TEXT, TEXT2, BORDER, TAB_MENU_HEIGHT, SCROLL_EXTRA_PADDING, WEB_TAB_MENU_PADDING, useApp } from './core';
 
-const ROLES = [
-  { id: 'resident', label: 'Resident', icon: 'person', color: PRIMARY },
-  { id: 'admin', label: 'Admin', icon: 'admin-panel-settings', color: ACCENT },
-  { id: 'worker', label: 'Worker', icon: 'engineering', color: SUCCESS },
-];
+
 const BADGES = [
   { icon: 'emoji-events', label: 'Active Reporter', color: WARNING },
   { icon: 'verified', label: 'Verified Member', color: PRIMARY },
@@ -23,6 +19,7 @@ export default function ProfileScreen({ navigation }) {
 
   const MENU_ITEMS = [
     { icon: 'notifications', label: 'Notifications', action: () => navigation.navigate('Notifications') },
+<<<<<<< Updated upstream
     { icon: 'analytics', label: 'Analytics', action: () => navigation.navigate('Analytics'), adminOnly: true },
     { icon: 'admin-panel-settings', label: 'Admin Dashboard', action: () => navigation.navigate('AdminDashboard'), adminOnly: true },
     { icon: 'share', label: 'Share ColonyCare', action: () => {} },
@@ -44,6 +41,15 @@ export default function ProfileScreen({ navigation }) {
       }
     }, danger: true },
   ].filter(item => !item.adminOnly || role === 'admin');
+=======
+    { icon: 'analytics', label: 'Analytics', action: () => navigation.navigate('Analytics') },
+    { icon: 'map', label: 'Map View', action: () => navigation.navigate('MapView') },
+    { icon: 'dark-mode', label: 'Dark Mode', isSwitch: true, value: darkMode, onChange: setDarkMode },
+    { icon: 'share', label: 'Share ColonyCare', action: () => {} },
+    { icon: 'info', label: 'About', action: () => {} },
+    { icon: 'logout', label: 'Logout', action: () => appCtx.logout(), danger: true },
+  ];
+>>>>>>> Stashed changes
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: theme.bg }} contentContainerStyle={{ paddingBottom: scrollBottom }} showsVerticalScrollIndicator={true}>
@@ -69,6 +75,10 @@ export default function ProfileScreen({ navigation }) {
         ))}
       </View>
       <View style={{ padding: 20 }}>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         {/* Badges */}
         {role !== 'admin' && (
           <>

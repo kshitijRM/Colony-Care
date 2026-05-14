@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { AppProvider, BG, CARD, BORDER, DANGER, PRIMARY, TEXT2, TAB_MENU_HEIGHT } from './core';
+import { AppProvider, BG, CARD, BORDER, DANGER, PRIMARY, TEXT2, TAB_MENU_HEIGHT, useApp } from './core';
 import HomeScreen from './HomeScreen';
 import ComplaintsScreen from './ComplaintsScreen';
 import SOSScreen from './SOSScreen';
@@ -108,10 +108,15 @@ function TabNavigator() {
   );
 }
 
+import AuthScreen from './AuthScreen';
+
 function AppNavigator() {
+  const { isLoggedIn, role } = useApp();
+
   return (
-    <AppProvider>
+    <>
       <StatusBar barStyle="light-content" backgroundColor={BG} />
+<<<<<<< Updated upstream
       <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
@@ -122,21 +127,51 @@ function AppNavigator() {
         <Stack.Screen name="Analytics" component={AnalyticsScreen} />
         <Stack.Screen name="MapView" component={MapViewScreen} />
         <Stack.Screen name="Notifications" component={NotificationsScreen} />
+=======
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {!isLoggedIn ? (
+          <Stack.Screen name="Auth" component={AuthScreen} />
+        ) : role === 'admin' ? (
+          <>
+            <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} />
+            <Stack.Screen name="Analytics" component={AnalyticsScreen} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="MainApp" component={TabNavigator} />
+            <Stack.Screen name="RaiseComplaint" component={RaiseComplaintScreen} />
+            <Stack.Screen name="ComplaintDetail" component={ComplaintDetailScreen} initialParams={{ complaintId: null }} />
+            <Stack.Screen name="Analytics" component={AnalyticsScreen} />
+            <Stack.Screen name="MapView" component={MapViewScreen} />
+            <Stack.Screen name="Notifications" component={NotificationsScreen} />
+          </>
+        )}
+>>>>>>> Stashed changes
       </Stack.Navigator>
-    </AppProvider>
+    </>
   );
 }
 
 export default function ColonyCareApp() {
   return (
+<<<<<<< Updated upstream
     <SafeAreaProvider style={{ flex: 1 }}>
       <View style={{ flex: 1, backgroundColor: BG }}>
+=======
+    <AppProvider>
+      <SafeAreaProvider>
+>>>>>>> Stashed changes
         <NavigationIndependentTree>
           <NavigationContainer>
             <AppNavigator />
           </NavigationContainer>
         </NavigationIndependentTree>
+<<<<<<< Updated upstream
       </View>
     </SafeAreaProvider>
+=======
+      </SafeAreaProvider>
+    </AppProvider>
+>>>>>>> Stashed changes
   );
 }

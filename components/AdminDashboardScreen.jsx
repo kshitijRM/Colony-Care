@@ -3,10 +3,11 @@ import { View, Text, ScrollView, TouchableOpacity, Alert, Platform, Dimensions, 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useQuery, useMutation } from 'platform-hooks';
-import { PRIMARY, ACCENT, BG, CARD, SECONDARY, SUCCESS, WARNING, DANGER, TEXT, TEXT2, BORDER, SEED_COMPLAINTS, WORKERS, CATEGORIES, StatCard, MiniBarChart, getPriorityColor, formatTime } from './core';
+import { PRIMARY, ACCENT, BG, CARD, SECONDARY, SUCCESS, WARNING, DANGER, TEXT, TEXT2, BORDER, SEED_COMPLAINTS, WORKERS, CATEGORIES, StatCard, MiniBarChart, getPriorityColor, formatTime, useApp } from './core';
 
 export default function AdminDashboardScreen({ navigation }) {
   const insets = useSafeAreaInsets();
+  const { logout } = useApp();
   const complaintsQ = useQuery('complaints');
   const workersQ = useQuery('workers');
   const allComplaints = useMemo(() => {
@@ -78,8 +79,8 @@ export default function AdminDashboardScreen({ navigation }) {
   return (
     <View style={{ flex: 1, backgroundColor: BG }}>
       <View style={{ paddingTop: insets.top + 8, paddingBottom: 14, paddingHorizontal: 20, backgroundColor: BG, borderBottomWidth: 1, borderBottomColor: BORDER, flexDirection: 'row', alignItems: 'center' }}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginRight: 14 }}>
-          <MaterialIcons name="arrow-back" size={24} color={TEXT} />
+        <TouchableOpacity onPress={() => logout()} style={{ marginRight: 14 }}>
+          <MaterialIcons name="logout" size={24} color={DANGER} />
         </TouchableOpacity>
         <View style={{ flex: 1 }}>
           <Text style={{ color: TEXT, fontSize: 18, fontWeight: 'bold' }}>Admin Dashboard</Text>

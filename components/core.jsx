@@ -41,6 +41,7 @@ export const Stack = createStackNavigator();
 export const AppContext = React.createContext({});
 export const AppProvider = ({ children }) => {
   const [role, setRole] = useState('resident');
+<<<<<<< Updated upstream
   const [userName, setUserName] = useState('Kshitij Dinni');
   const [userEmail, setUserEmail] = useState('kshitijdinni6605@gmail.com');
   
@@ -54,6 +55,34 @@ export const AppProvider = ({ children }) => {
   }), []);
 
   const value = useMemo(() => ({ role, setRole, userName, setUserName, userEmail, setUserEmail, theme }), [role, userName, userEmail, theme]);
+=======
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const theme = useMemo(() => ({
+    bg: darkMode ? BG : '#F1F5F9',
+    card: darkMode ? CARD : '#FFFFFF',
+    text: darkMode ? TEXT : '#0F172A',
+    text2: darkMode ? TEXT2 : '#64748B',
+    border: darkMode ? BORDER : 'rgba(0,0,0,0.08)',
+    glass: darkMode ? GLASS : 'rgba(255,255,255,0.85)',
+  }), [darkMode]);
+
+  const login = useCallback((selectedRole) => {
+    setRole(selectedRole || 'resident');
+    setIsLoggedIn(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+  }, []);
+
+  const value = useMemo(() => ({ 
+    role, setRole, 
+    isLoggedIn, login, logout,
+    darkMode, setDarkMode, theme 
+  }), [role, isLoggedIn, darkMode, theme, login, logout]);
+
+>>>>>>> Stashed changes
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 export const useApp = () => useContext(AppContext);
