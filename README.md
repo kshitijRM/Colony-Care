@@ -61,8 +61,7 @@ Built with **React Native + Expo**, fully typed in **TypeScript**, and navigated
 
 </div>
 
-> 📁 **To make screenshots show up:** Upload your 10 app images into `assets/screenshots/` folder in the repo with these exact filenames:
-> `login.jpeg` · `home-resident.jpeg` · `home-admin.jpeg` · `complaints.jpeg` · `raise-complaint.jpeg` · `sos.jpeg` · `feed.jpeg` · `profile-resident.jpeg` · `profile-admin.jpeg` · `staff.jpeg`
+
 
 ---
 
