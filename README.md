@@ -31,16 +31,54 @@ Built with **React Native + Expo**, fully typed in **TypeScript**, and navigated
 
 ---
 
+## 📸 Screenshots
+
+<div align="center">
+
+### 🔐 Login & 🏠 Home Dashboard
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/login.jpeg" width="30%"/>  &nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/home-resident.jpeg" width="30%"/>  &nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/home-admin.jpeg" width="30%"/>
+
+<br/><br/>
+
+### 📋 Complaints & 🚨 Emergency SOS
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/complaints.jpeg" width="30%"/>  &nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/raise-complaint.jpeg" width="30%"/>  &nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/sos.jpeg" width="30%"/>
+
+<br/><br/>
+
+### 💬 Community Feed & 👤 Profile
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/feed.jpeg" width="30%"/>  &nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/profile-resident.jpeg" width="30%"/>  &nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/profile-admin.jpeg" width="30%"/>
+
+<br/><br/>
+
+### 👷 Colony Staff Management
+<img src="https://raw.githubusercontent.com/kshitijRM/Colony-Care/main/assets/screenshots/staff.jpeg" width="30%"/>
+
+</div>
+
+> 📁 **To make screenshots show up:** Upload your 10 app images into `assets/screenshots/` folder in the repo with these exact filenames:
+> `login.jpeg` · `home-resident.jpeg` · `home-admin.jpeg` · `complaints.jpeg` · `raise-complaint.jpeg` · `sos.jpeg` · `feed.jpeg` · `profile-resident.jpeg` · `profile-admin.jpeg` · `staff.jpeg`
+
+---
+
 ## ✨ Features
 
 | Module | Description |
 |--------|-------------|
-| 🏠 **Dashboard** | Personalised overview of notices, dues & requests |
-| 📢 **Announcements** | Colony-wide updates posted by admins instantly |
-| 🔧 **Maintenance** | Raise, track, and close repair tickets |
-| 🚪 **Visitor Access** | Pre-approve guests, log entry/exit |
-| 💬 **Community Board** | Structured, spam-free neighbour feed |
-| 🔔 **Notifications** | Real-time push alerts for every update |
+| 🔐 **Login** | Google OAuth + Email/Password login |
+| 🏠 **Dashboard** | Colony Health Score, weekly trends, quick actions |
+| 📋 **Complaints** | Raise, filter & track complaints with Map View |
+| 🤖 **AI Categorization** | Auto-categorize complaints by type & priority |
+| 🚨 **Emergency SOS** | One-tap SOS for Fire, Medical, Security, Flood |
+| 💬 **Community Feed** | Trending posts, announcements & discussions |
+| 👤 **Profile & Badges** | Resident stats, earned badges, settings |
+| 👷 **Staff Management** | Register & manage colony workers (Admin only) |
+| 📊 **Admin Dashboard** | Analytics, staff control & colony-wide insights |
 
 ---
 
@@ -63,15 +101,16 @@ Colony-Care/
 ├── app/
 │   ├── (tabs)/
 │   │   ├── index.tsx          # 🏠 Dashboard
-│   │   ├── announcements.tsx  # 📢 Announcements
-│   │   ├── requests.tsx       # 🔧 Maintenance
+│   │   ├── complaints.tsx     # 📋 Complaints
+│   │   ├── feed.tsx           # 💬 Community Feed
 │   │   └── profile.tsx        # 👤 Profile
 │   └── _layout.tsx            # Root layout
 ├── components/                # Reusable UI components
 ├── constants/                 # Colors, sizes
 ├── hooks/                     # Custom hooks
 ├── types/                     # TypeScript definitions
-└── assets/                    # Images & fonts
+└── assets/
+    └── screenshots/           # 📸 App screenshots
 ```
 
 ---
@@ -120,8 +159,10 @@ git push origin feat/your-feature
 
 - [x] Project scaffold + Expo Router
 - [x] Tab navigation + core screens
-- [ ] Maintenance request full flow
-- [ ] OTP-based authentication
+- [x] Complaint system with AI categorization
+- [x] Emergency SOS screen
+- [x] Community Feed
+- [x] Admin & Staff Management
 - [ ] Backend API integration
 - [ ] Push notifications
 - [ ] Visitor QR code generation
@@ -137,7 +178,7 @@ git push origin feat/your-feature
 | 🚀 | **Vijay Purandare** | [@vijju9019](https://github.com/vijju9019) |
 | 🤝 | **Amith H P** | [@amith-hp](https://github.com/amith-hp) |
 
-**The Debbuger's** · Cambridge Institute of Technology, Bangalore 🇮🇳
+**The Debugger's** · Cambridge Institute of Technology, Bangalore 🇮🇳
 
 ---
 
@@ -161,6 +202,6 @@ Licensed under the **MIT License** — see [LICENSE](./LICENSE) for details.
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&animation=fadeIn" width="100%"/>
 
-*Made with ❤️ by THE Debbuger's · If this helped you, drop a ⭐!*
+*Made with ❤️ by The Debugger's · If this helped you, drop a ⭐!*
 
 </div>
