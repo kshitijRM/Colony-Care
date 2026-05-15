@@ -1,80 +1,166 @@
-# 🏙️ Colony Care (Smart City)
+<div align="center">
 
-Welcome to **Colony Care**, an intelligent mobile application designed to streamline and modernize residential community management. Built with [React Native](https://reactnative.dev/) and [Expo](https://expo.dev/), Colony Care brings smart city features directly to residents' smartphones.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Colony%20Care&fontSize=70&fontAlignY=38&desc=Your%20Community%2C%20Connected.&descAlignY=62&descSize=18&fontColor=ffffff&animation=fadeIn" width="100%"/>
 
-## ✨ Features (Proposed)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&pause=1000&color=E94560&center=true&vCenter=true&width=600&lines=🏘️+Residential+Colony+Management+App;📱+React+Native+%2B+Expo+%2B+TypeScript;🚀+Open+Source+%7C+PRs+Welcome!)](https://git.io/typing-svg)
 
-- 🔐 **Secure Authentication:** Role-based login for Residents, Admins, and Security Guards.
-- 📢 **Notice Board:** Real-time announcements and community updates.
-- 🛠️ **Maintenance Requests:** Easily raise and track facility maintenance or repair tickets.
-- 📅 **Event Management:** Book community halls, sports facilities, and RSVP to community events.
-- 🛡️ **Visitor Management:** Pre-approve guests, track entry/exit, and notify residents of arrivals.
-- 📞 **Emergency Contacts:** Quick access to emergency services and committee members.
+<br/>
 
-## 🚀 Tech Stack
+[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Expo Router](https://img.shields.io/badge/Expo_Router-1C1C1E?style=for-the-badge&logo=expo&logoColor=white)](https://expo.github.io/router/)
 
-- **Frontend:** React Native, Expo, Expo Router
-- **Language:** TypeScript
-- **Styling:** React Native Stylesheets
-- **Navigation:** Expo Router (File-based routing)
-- **Icons:** Expo Vector Icons
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-2ECC71?style=flat-square)](http://makeapullrequest.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-F39C12?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Stars](https://img.shields.io/github/stars/kshitijRM/Colony-Care?style=flat-square&color=F1C40F)](https://github.com/kshitijRM/Colony-Care/stargazers)
+[![Issues](https://img.shields.io/github/issues/kshitijRM/Colony-Care?style=flat-square&color=E74C3C)](https://github.com/kshitijRM/Colony-Care/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/kshitijRM/Colony-Care?style=flat-square&color=1ABC9C)](https://github.com/kshitijRM/Colony-Care/commits)
 
-## 📂 Project Structure
+</div>
 
-```text
-smartcity/
-├── app/                  # Expo Router file-based routing
-│   ├── (tabs)/           # Bottom tab navigation screens
-│   ├── _layout.tsx       # Main app layout
-│   └── +not-found.tsx    # 404 screen
-├── assets/               # Static assets (images, fonts, etc.)
-├── components/           # Reusable UI components
-├── constants/            # Theme, Colors, and constants
-├── hooks/                # Custom React hooks
-└── scripts/              # Project utility scripts
+---
+
+## 🏘️ About
+
+**Colony-Care** is a cross-platform mobile app that modernizes how residential communities — housing societies, gated colonies, and apartments — communicate and operate.
+
+> No more chaotic WhatsApp groups or missed paper notices. **One app. One community. Zero friction.**
+
+Built with **React Native + Expo**, fully typed in **TypeScript**, and navigated via **Expo Router's** file-based routing.
+
+---
+
+## ✨ Features
+
+| Module | Description |
+|--------|-------------|
+| 🏠 **Dashboard** | Personalised overview of notices, dues & requests |
+| 📢 **Announcements** | Colony-wide updates posted by admins instantly |
+| 🔧 **Maintenance** | Raise, track, and close repair tickets |
+| 🚪 **Visitor Access** | Pre-approve guests, log entry/exit |
+| 💬 **Community Board** | Structured, spam-free neighbour feed |
+| 🔔 **Notifications** | Real-time push alerts for every update |
+
+---
+
+## 🛠️ Tech Stack
+
+```
+📱 Framework   →  React Native + Expo (Managed Workflow)
+🧭 Routing     →  Expo Router  (File-based, like Next.js)
+🔷 Language    →  TypeScript   (Strict mode)
+🎨 Styling     →  React Native StyleSheets
+🔣 Icons       →  @expo/vector-icons
 ```
 
-## 🛠️ Getting Started
+---
 
-### Prerequisites
+## 📁 Project Structure
 
-- Node.js (v18 or newer recommended)
-- npm or yarn
-- Expo Go app installed on your physical device (iOS/Android), or an Emulator/Simulator set up on your machine.
+```
+Colony-Care/
+├── app/
+│   ├── (tabs)/
+│   │   ├── index.tsx          # 🏠 Dashboard
+│   │   ├── announcements.tsx  # 📢 Announcements
+│   │   ├── requests.tsx       # 🔧 Maintenance
+│   │   └── profile.tsx        # 👤 Profile
+│   └── _layout.tsx            # Root layout
+├── components/                # Reusable UI components
+├── constants/                 # Colors, sizes
+├── hooks/                     # Custom hooks
+├── types/                     # TypeScript definitions
+└── assets/                    # Images & fonts
+```
 
-### Installation
+---
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/kshitijRM/Colony-Care.git
-   cd "Colony Care/smartcity"
-   ```
+## 🚀 Getting Started
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+**Prerequisites:** Node.js `v18+`, Expo CLI, Expo Go app on your phone.
 
-3. **Start the development server:**
-   ```bash
-   npm start
-   ```
+```bash
+# Clone & install
+git clone https://github.com/kshitijRM/Colony-Care.git
+cd Colony-Care
+npm install
 
-### Running the App
+# Start dev server
+npx expo start
+```
 
-- **On a physical device:** Open the Expo Go app on your phone and scan the QR code generated in your terminal.
-- **On an Android Emulator:** Press `a` in the terminal.
-- **On an iOS Simulator:** Press `i` in the terminal (Requires macOS).
-- **On the Web:** Press `w` in the terminal to view it in your browser.
+> 📱 Scan the QR code with **Expo Go** — you're live!
+
+```bash
+npx expo start --android   # Android emulator
+npx expo start --ios       # iOS simulator (macOS only)
+npx expo start --clear     # Clear cache & restart
+```
+
+---
 
 ## 🤝 Contributing
 
-1. Fork the project.
-2. Create your feature branch: `git checkout -b feature/AmazingFeature`
-3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
-4. Push to the branch: `git push origin feature/AmazingFeature`
-5. Open a Pull Request.
+```bash
+git checkout -b feat/your-feature
+# make changes
+git commit -m "feat: your message"
+git push origin feat/your-feature
+# Open a Pull Request 🚀
+```
+
+**Commit convention:** `feat:` · `fix:` · `docs:` · `style:` · `refactor:` · `chore:`
+
+> 🟢 New? Look for [`good first issue`](https://github.com/kshitijRM/Colony-Care/issues?q=label%3A%22good+first+issue%22) labels!
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Project scaffold + Expo Router
+- [x] Tab navigation + core screens
+- [ ] Maintenance request full flow
+- [ ] OTP-based authentication
+- [ ] Backend API integration
+- [ ] Push notifications
+- [ ] Visitor QR code generation
+- [ ] Dark mode support
+
+---
+
+## 👥 Team
+
+| | Name | GitHub |
+|--|------|--------|
+| 👑 | **Kshitij** | [@kshitijRM](https://github.com/kshitijRM) |
+| 🚀 | **Vijay Purandare** | [@vijju9019](https://github.com/vijju9019) |
+| 🤝 | **Amith H P** | [@amith-hp](https://github.com/amith-hp) |
+
+**The Debbuger's** · Cambridge Institute of Technology, Bangalore 🇮🇳
+
+---
+
+## 🏆 Contributors
+
+<div align="center">
+
+[![Contributors](https://contrib.rocks/image?repo=kshitijRM/Colony-Care)](https://github.com/kshitijRM/Colony-Care/graphs/contributors)
+
+</div>
+
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Licensed under the **MIT License** — see [LICENSE](./LICENSE) for details.
+
+---
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&animation=fadeIn" width="100%"/>
+
+*Made with ❤️ by Team Alpha-Z · If this helped you, drop a ⭐!*
+
+</div>
