@@ -3,8 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Dimensions, Platform, TextInp
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useQuery } from 'platform-hooks';
-import { useMaps } from 'platform-hooks';
+import { useQuery, useMaps } from '../platform-hooks';
 import { PRIMARY, SECONDARY, BG, CARD, SUCCESS, WARNING, DANGER, TEXT, TEXT2, BORDER, SEED_COMPLAINTS, getPriorityColor, getStatusLabel } from './core';
 
 export default function MapViewScreen({ navigation }) {

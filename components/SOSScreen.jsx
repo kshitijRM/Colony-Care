@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert, Platform, Dimensions } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useLocation } from 'platform-hooks';
+import { useLocation } from '../platform-hooks';
 import { PRIMARY, SECONDARY, ACCENT, BG, CARD, SUCCESS, WARNING, DANGER, TEXT, TEXT2, BORDER, TAB_MENU_HEIGHT, SCROLL_EXTRA_PADDING, WEB_TAB_MENU_PADDING } from './core';
 
 const { width: SCREEN_W } = Dimensions.get('window');

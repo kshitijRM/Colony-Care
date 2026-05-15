@@ -9,7 +9,7 @@ const { width } = Dimensions.get('window');
 
 export default function LoginScreen({ navigation }) {
   const insets = useSafeAreaInsets();
-  const { setUserName, setUserEmail, setRole } = useApp();
+  const { setUserName, setUserEmail, setRole, login } = useApp();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -23,6 +23,7 @@ export default function LoginScreen({ navigation }) {
     setUserName(email.split('@')[0] || (roleToSet.charAt(0).toUpperCase() + roleToSet.slice(1)));
     setUserEmail(email || `${roleToSet}@colony.care`);
     setRole(roleToSet);
+    login(roleToSet);
     navigation.replace('MainApp');
   };
 
@@ -34,6 +35,7 @@ export default function LoginScreen({ navigation }) {
       setUserName('Kshitij Dinni');
       setUserEmail('kshitijdinni6605@gmail.com');
       setRole('resident');
+      login('resident');
       setLoadingGoogle(false);
       navigation.replace('MainApp');
     }, 2000);
@@ -135,7 +137,7 @@ export default function LoginScreen({ navigation }) {
               onPress={() => navigation.navigate('Signup')}
               style={{ marginTop: 20, alignItems: 'center' }}
             >
-              <Text style={{ color: TEXT2, fontSize: 13 }}>Don't have an account? <Text style={{ color: PRIMARY, fontWeight: 'bold' }}>Sign up</Text></Text>
+              <Text style={{ color: TEXT2, fontSize: 13 }}>Don&apos;t have an account? <Text style={{ color: PRIMARY, fontWeight: 'bold' }}>Sign up</Text></Text>
             </TouchableOpacity>
           </View>
         </View>

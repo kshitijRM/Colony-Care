@@ -104,7 +104,7 @@ export default function FeedScreen({ navigation }) {
               <MaterialIcons name="create" size={22} color={ACCENT} />
             </View>
             <TouchableOpacity style={{ flex: 1, backgroundColor: BG, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 12, borderWidth: 1, borderColor: BORDER }}>
-              <Text style={{ color: TEXT2, fontSize: 14 }}>What's happening in your colony?</Text>
+              <Text style={{ color: TEXT2, fontSize: 14 }}>What&apos;s happening in your colony?</Text>
             </TouchableOpacity>
           </View>
         )}

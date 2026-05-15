@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Platform, TextInput, Alert } 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useQuery, useMutation } from 'platform-hooks';
+import { useQuery, useMutation } from '../platform-hooks';
 import {
   PRIMARY, SECONDARY, BG, CARD, ACCENT, SUCCESS, WARNING, DANGER, TEXT, TEXT2, BORDER,
   TAB_MENU_HEIGHT, SCROLL_EXTRA_PADDING, WEB_TAB_MENU_PADDING,

@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Alert, Platform, Dimensions, TextInput } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useQuery, useMutation } from 'platform-hooks';
+import { useQuery, useMutation } from '../platform-hooks';
 import { PRIMARY, ACCENT, BG, CARD, SECONDARY, SUCCESS, WARNING, DANGER, TEXT, TEXT2, BORDER, SEED_COMPLAINTS, WORKERS, CATEGORIES, StatCard, MiniBarChart, getPriorityColor, formatTime, useApp } from './core';
 
 export default function AdminDashboardScreen({ navigation }) {

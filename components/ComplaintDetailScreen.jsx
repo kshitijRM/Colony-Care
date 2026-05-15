@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Alert, Platform, Dimensions, Modal } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useQuery, useMutation, useShare } from 'platform-hooks';
+import { useQuery, useMutation, useShare } from '../platform-hooks';
 import {
   PRIMARY, ACCENT, BG, CARD, SUCCESS, WARNING, DANGER, SECONDARY, TEXT, TEXT2, BORDER,
   SEED_COMPLAINTS, WORKERS, HEADER_HEIGHT, useApp,

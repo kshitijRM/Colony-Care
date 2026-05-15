@@ -14,42 +14,40 @@ const BADGES = [
 export default function ProfileScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const appCtx = useApp();
-  const { theme, role } = appCtx;
+  const { theme, role, darkMode, setDarkMode, logout } = appCtx;
   const scrollBottom = Platform.OS === 'web' ? WEB_TAB_MENU_PADDING : TAB_MENU_HEIGHT + insets.bottom + SCROLL_EXTRA_PADDING;
 
   const MENU_ITEMS = [
     { icon: 'notifications', label: 'Notifications', action: () => navigation.navigate('Notifications') },
-<<<<<<< Updated upstream
     { icon: 'analytics', label: 'Analytics', action: () => navigation.navigate('Analytics'), adminOnly: true },
     { icon: 'admin-panel-settings', label: 'Admin Dashboard', action: () => navigation.navigate('AdminDashboard'), adminOnly: true },
-    { icon: 'share', label: 'Share ColonyCare', action: () => {} },
-    { icon: 'info', label: 'About', action: () => {} },
-    { icon: 'logout', label: 'Logout', action: () => {
-      const doLogout = () => {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Login' }],
-        });
-      };
-      if (Platform.OS === 'web') {
-        if (confirm('Are you sure you want to logout?')) doLogout();
-      } else {
-        Alert.alert('Logout', 'Are you sure you want to logout?', [
-          { text: 'Cancel', style: 'cancel' },
-          { text: 'Logout', style: 'destructive', onPress: doLogout }
-        ]);
-      }
-    }, danger: true },
-  ].filter(item => !item.adminOnly || role === 'admin');
-=======
-    { icon: 'analytics', label: 'Analytics', action: () => navigation.navigate('Analytics') },
     { icon: 'map', label: 'Map View', action: () => navigation.navigate('MapView') },
     { icon: 'dark-mode', label: 'Dark Mode', isSwitch: true, value: darkMode, onChange: setDarkMode },
     { icon: 'share', label: 'Share ColonyCare', action: () => {} },
     { icon: 'info', label: 'About', action: () => {} },
-    { icon: 'logout', label: 'Logout', action: () => appCtx.logout(), danger: true },
-  ];
->>>>>>> Stashed changes
+    {
+      icon: 'logout',
+      label: 'Logout',
+      action: () => {
+        const doLogout = () => {
+          logout();
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Login' }],
+          });
+        };
+        if (Platform.OS === 'web') {
+          if (confirm('Are you sure you want to logout?')) doLogout();
+        } else {
+          Alert.alert('Logout', 'Are you sure you want to logout?', [
+            { text: 'Cancel', style: 'cancel' },
+            { text: 'Logout', style: 'destructive', onPress: doLogout },
+          ]);
+        }
+      },
+      danger: true,
+    },
+  ].filter((item) => !item.adminOnly || role === 'admin');
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: theme.bg }} contentContainerStyle={{ paddingBottom: scrollBottom }} showsVerticalScrollIndicator={true}>
@@ -75,10 +73,6 @@ export default function ProfileScreen({ navigation }) {
         ))}
       </View>
       <View style={{ padding: 20 }}>
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         {/* Badges */}
         {role !== 'admin' && (
           <>

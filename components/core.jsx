@@ -10,8 +10,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useQuery, useMutation, useCamera, useLocation, useShare, useMaps, useFilePicker } from 'platform-hooks';
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
 export const PRIMARY = '#2563EB';
@@ -41,21 +39,8 @@ export const Stack = createStackNavigator();
 export const AppContext = React.createContext({});
 export const AppProvider = ({ children }) => {
   const [role, setRole] = useState('resident');
-<<<<<<< Updated upstream
   const [userName, setUserName] = useState('Kshitij Dinni');
   const [userEmail, setUserEmail] = useState('kshitijdinni6605@gmail.com');
-  
-  const theme = useMemo(() => ({
-    bg: BG,
-    card: CARD,
-    text: TEXT,
-    text2: TEXT2,
-    border: BORDER,
-    glass: GLASS,
-  }), []);
-
-  const value = useMemo(() => ({ role, setRole, userName, setUserName, userEmail, setUserEmail, theme }), [role, userName, userEmail, theme]);
-=======
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const theme = useMemo(() => ({
@@ -76,13 +61,12 @@ export const AppProvider = ({ children }) => {
     setIsLoggedIn(false);
   }, []);
 
-  const value = useMemo(() => ({ 
-    role, setRole, 
+  const value = useMemo(() => ({
+    role, setRole,
+    userName, setUserName, userEmail, setUserEmail,
     isLoggedIn, login, logout,
-    darkMode, setDarkMode, theme 
-  }), [role, isLoggedIn, darkMode, theme, login, logout]);
-
->>>>>>> Stashed changes
+    darkMode, setDarkMode, theme,
+  }), [role, userName, userEmail, isLoggedIn, darkMode, theme, login, logout]);
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 export const useApp = () => useContext(AppContext);

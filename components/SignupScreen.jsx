@@ -9,7 +9,7 @@ const { width } = Dimensions.get('window');
 
 export default function SignupScreen({ navigation }) {
   const insets = useSafeAreaInsets();
-  const { setRole, setUserName, setUserEmail } = useApp();
+  const { setRole, setUserName, setUserEmail, login } = useApp();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -23,6 +23,7 @@ export default function SignupScreen({ navigation }) {
     if (email) setUserEmail(email);
     else if (phone) setUserEmail(phone + '@colony.care'); // Fallback email for phone login
     setRole(selectedRole);
+    login(selectedRole);
     navigation.replace('MainApp');
   };
 
@@ -34,6 +35,7 @@ export default function SignupScreen({ navigation }) {
       setUserName('Kshitij Dinni');
       setUserEmail('kshitijdinni6605@gmail.com');
       setRole('resident');
+      login('resident');
       setLoadingGoogle(false);
       navigation.replace('MainApp');
     }, 2000);
