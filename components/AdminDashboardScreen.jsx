@@ -190,7 +190,7 @@ export default function AdminDashboardScreen({ navigation }) {
         </View>
         <Text style={{ color: TEXT, fontSize: 16, fontWeight: 'bold', marginBottom: 12 }}>Pending Queue</Text>
         {allComplaints.filter(c => c.status === 'pending').map(c => (
-          <View key={c.id} style={{ backgroundColor: CARD, borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: BORDER, borderLeftWidth: 3, borderLeftColor: getPriorityColor(c.priority) }}>
+          <TouchableOpacity key={c.id} onPress={() => navigation.navigate('ComplaintDetail', { complaintId: c.id })} style={{ backgroundColor: CARD, borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: BORDER, borderLeftWidth: 3, borderLeftColor: getPriorityColor(c.priority) }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
               <View style={{ flex: 1, marginRight: 8 }}>
                 <Text style={{ color: TEXT, fontSize: 14, fontWeight: '600', marginBottom: 4 }}>{c.title}</Text>
@@ -208,7 +208,7 @@ export default function AdminDashboardScreen({ navigation }) {
                 </TouchableOpacity>
               ))}
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
         {allComplaints.filter(c => c.status === 'pending').length === 0 && (
           <View style={{ backgroundColor: SUCCESS + '22', borderRadius: 14, padding: 20, alignItems: 'center', borderWidth: 1, borderColor: SUCCESS + '44', marginBottom: 16 }}>
@@ -221,7 +221,7 @@ export default function AdminDashboardScreen({ navigation }) {
         {allComplaints.filter(c => c.status === 'in_progress').map(c => {
           const worker = allWorkers.find(w => w.id === c.worker_id);
           return (
-            <View key={c.id} style={{ backgroundColor: CARD, borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: SECONDARY + '44', borderLeftWidth: 3, borderLeftColor: SECONDARY }}>
+            <TouchableOpacity key={c.id} onPress={() => navigation.navigate('ComplaintDetail', { complaintId: c.id })} style={{ backgroundColor: CARD, borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: SECONDARY + '44', borderLeftWidth: 3, borderLeftColor: SECONDARY }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
                 <View style={{ flex: 1, marginRight: 8 }}>
                   <Text style={{ color: TEXT, fontSize: 14, fontWeight: '600', marginBottom: 4 }}>{c.title}</Text>
@@ -235,7 +235,7 @@ export default function AdminDashboardScreen({ navigation }) {
                 <View style={{ height: '100%', width: '65%', backgroundColor: SECONDARY }} />
               </View>
               <Text style={{ color: TEXT2, fontSize: 10, marginTop: 6 }}>Work in progress · Est. completion 2h</Text>
-            </View>
+            </TouchableOpacity>
           );
         })}
         {allComplaints.filter(c => c.status === 'in_progress').length === 0 && (

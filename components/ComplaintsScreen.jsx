@@ -44,7 +44,7 @@ export default function ComplaintsScreen({ navigation }) {
     <View style={{ flex: 1, backgroundColor: theme.bg }}>
       <View style={{ paddingTop: insets.top + 12, paddingBottom: 14, paddingHorizontal: 20, backgroundColor: theme.bg, borderBottomWidth: 1, borderBottomColor: BORDER }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <Text style={{ color: TEXT, fontSize: 20, fontWeight: 'bold' }}>My Complaints</Text>
+          <Text style={{ color: TEXT, fontSize: 20, fontWeight: 'bold' }}>{role === 'admin' ? 'Community Complaints' : 'My Complaints'}</Text>
           <TouchableOpacity 
             onPress={() => navigation.navigate('MapView')}
             style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: PRIMARY + '22', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 6, borderWidth: 1, borderColor: PRIMARY + '44' }}
@@ -71,39 +71,41 @@ export default function ComplaintsScreen({ navigation }) {
         keyExtractor={item => item.id}
         ListHeaderComponent={() => (
           <View style={{ paddingBottom: 8 }}>
-            <View style={{ padding: 16, backgroundColor: theme.card, borderRadius: 16, marginHorizontal: 16, marginTop: 16, marginBottom: 8, borderWidth: 1, borderColor: BORDER }}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                <View>
-                  <Text style={{ color: TEXT, fontSize: 18, fontWeight: 'bold' }}>New Issue</Text>
-                  <Text style={{ color: TEXT2, fontSize: 12, marginTop: 2 }}>What can we help with today?</Text>
-                </View>
-                <TouchableOpacity 
-                  onPress={() => navigation.navigate('RaiseComplaint')}
-                  style={{ backgroundColor: PRIMARY + '15', paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 }}
-                >
-                   <Text style={{ color: PRIMARY, fontSize: 12, fontWeight: '600' }}>See All</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                {[
-                  { id: 'water', label: 'Water', icon: 'opacity', color: SECONDARY },
-                  { id: 'electricity', label: 'Power', icon: 'flash-on', color: WARNING },
-                  { id: 'roads', label: 'Roads', icon: 'edit-road', color: SUCCESS },
-                  { id: 'safety', label: 'Safety', icon: 'security', color: '#F43F5E' },
-                ].map(cat => (
+            {role !== 'admin' && (
+              <View style={{ padding: 16, backgroundColor: theme.card, borderRadius: 16, marginHorizontal: 16, marginTop: 16, marginBottom: 8, borderWidth: 1, borderColor: BORDER }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                  <View>
+                    <Text style={{ color: TEXT, fontSize: 18, fontWeight: 'bold' }}>New Issue</Text>
+                    <Text style={{ color: TEXT2, fontSize: 12, marginTop: 2 }}>What can we help with today?</Text>
+                  </View>
                   <TouchableOpacity 
-                    key={cat.id}
-                    onPress={() => navigation.navigate('RaiseComplaint', { quickCategory: cat.id })}
-                    style={{ alignItems: 'center', flex: 1 }}
+                    onPress={() => navigation.navigate('RaiseComplaint')}
+                    style={{ backgroundColor: PRIMARY + '15', paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8 }}
                   >
-                    <View style={{ width: 48, height: 48, borderRadius: 14, backgroundColor: cat.color + '15', justifyContent: 'center', alignItems: 'center', marginBottom: 8, borderWidth: 1, borderColor: cat.color + '30' }}>
-                      <MaterialIcons name={cat.icon} size={24} color={cat.color} />
-                    </View>
-                    <Text style={{ color: TEXT, fontSize: 11, fontWeight: '600' }}>{cat.label}</Text>
+                     <Text style={{ color: PRIMARY, fontSize: 12, fontWeight: '600' }}>See All</Text>
                   </TouchableOpacity>
-                ))}
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                  {[
+                    { id: 'water', label: 'Water', icon: 'opacity', color: SECONDARY },
+                    { id: 'electricity', label: 'Power', icon: 'flash-on', color: WARNING },
+                    { id: 'roads', label: 'Roads', icon: 'edit-road', color: SUCCESS },
+                    { id: 'safety', label: 'Safety', icon: 'security', color: '#F43F5E' },
+                  ].map(cat => (
+                    <TouchableOpacity 
+                      key={cat.id}
+                      onPress={() => navigation.navigate('RaiseComplaint', { quickCategory: cat.id })}
+                      style={{ alignItems: 'center', flex: 1 }}
+                    >
+                      <View style={{ width: 48, height: 48, borderRadius: 14, backgroundColor: cat.color + '15', justifyContent: 'center', alignItems: 'center', marginBottom: 8, borderWidth: 1, borderColor: cat.color + '30' }}>
+                        <MaterialIcons name={cat.icon} size={24} color={cat.color} />
+                      </View>
+                      <Text style={{ color: TEXT, fontSize: 11, fontWeight: '600' }}>{cat.label}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
               </View>
-            </View>
+            )}
             <View style={{ paddingHorizontal: 16, paddingTop: 16, paddingBottom: 8 }}>
               <Text style={{ color: TEXT, fontSize: 16, fontWeight: 'bold' }}>{filter === 'all' ? 'Recent Complaints' : `${filter.charAt(0).toUpperCase() + filter.slice(1)} Complaints`}</Text>
             </View>

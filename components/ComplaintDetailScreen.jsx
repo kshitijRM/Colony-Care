@@ -1,12 +1,11 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Alert, Platform, Dimensions } from 'react-native';
+import React, { useState, useMemo, useRef } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Alert, Platform, Dimensions, Modal } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useQuery } from 'platform-hooks';
-import { useShare } from 'platform-hooks';
+import { useQuery, useMutation, useShare } from 'platform-hooks';
 import {
   PRIMARY, ACCENT, BG, CARD, SUCCESS, WARNING, DANGER, SECONDARY, TEXT, TEXT2, BORDER,
-  SEED_COMPLAINTS, WORKERS, HEADER_HEIGHT,
+  SEED_COMPLAINTS, WORKERS, HEADER_HEIGHT, useApp,
   getCategoryInfo, getPriorityColor, getStatusColor, getStatusLabel, formatTime, getAreaAuthority,
 } from './core';
 
@@ -14,11 +13,39 @@ export default function ComplaintDetailScreen({ navigation, route }) {
   const complaintId = route?.params?.complaintId;
   const insets = useSafeAreaInsets();
   const { share } = useShare();
+  const { role } = useApp();
   const complaintsQ = useQuery('complaints');
+  const workersQ = useQuery('workers');
   const allComplaints = useMemo(() => (complaintsQ.data?.length > 0 ? complaintsQ.data : SEED_COMPLAINTS), [complaintsQ.data]);
+  const allWorkers = useMemo(() => {
+    const dbData = workersQ.data || [];
+    const seedIds = new Set(dbData.map(w => w.id));
+    return [...dbData, ...WORKERS.filter(w => !seedIds.has(w.id))];
+  }, [workersQ.data]);
+  const { mutate: updateComplaint } = useMutation('complaints', 'update');
+
   const complaint = useMemo(() => (!complaintId ? SEED_COMPLAINTS[0] : allComplaints.find(c => c.id === complaintId) || SEED_COMPLAINTS[0]), [allComplaints, complaintId]);
   const catInfo = getCategoryInfo(complaint.category);
   const [rating, setRating] = useState(0);
+  const [showAssignModal, setShowAssignModal] = useState(false);
+  const scrollRef = useRef(null);
+
+  const handleAssign = (workerId) => {
+    updateComplaint({ id: complaint.id, data: { worker_id: workerId, status: 'in_progress', updated_at: Date.now() } })
+      .then(() => { 
+        setShowAssignModal(false);
+        Platform.OS === 'web' ? alert('Worker assigned!') : Alert.alert('Assigned', 'Worker assigned.'); 
+      })
+      .catch(e => { Platform.OS === 'web' ? alert(e.message) : Alert.alert('Error', e.message); });
+  };
+
+  const handleResolve = () => {
+    updateComplaint({ id: complaint.id, data: { status: 'resolved', updated_at: Date.now() } })
+      .then(() => { 
+        Platform.OS === 'web' ? alert('Issue resolved!') : Alert.alert('Success', 'Issue marked as resolved.'); 
+      })
+      .catch(e => { Platform.OS === 'web' ? alert(e.message) : Alert.alert('Error', e.message); });
+  };
 
   const timeline = [
     { icon: 'flag', color: PRIMARY, label: 'Complaint Submitted', time: complaint.created_at, desc: 'Complaint #' + complaint.id + ' registered.' },
@@ -42,7 +69,7 @@ export default function ComplaintDetailScreen({ navigation, route }) {
           <MaterialIcons name="share" size={20} color={TEXT} />
         </TouchableOpacity>
       </View>
-      <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }} showsVerticalScrollIndicator={false}>
+      <ScrollView ref={scrollRef} contentContainerStyle={{ padding: 20, paddingBottom: 40 }} showsVerticalScrollIndicator={false}>
         {/* Main card */}
         <View style={{ backgroundColor: CARD, borderRadius: 16, padding: 20, marginBottom: 16, borderWidth: 1, borderColor: BORDER, borderLeftWidth: 4, borderLeftColor: getPriorityColor(complaint.priority) }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
@@ -78,6 +105,26 @@ export default function ComplaintDetailScreen({ navigation, route }) {
                 {complaint.ai_category ? <Text style={{ color: TEXT2, fontSize: 12, marginTop: 2 }}>{complaint.ai_category}</Text> : null}
               </View>
             </View>
+          )}
+          {role === 'admin' && complaint.status !== 'resolved' && (
+            <TouchableOpacity 
+              onPress={() => setShowAssignModal(true)}
+              style={{ backgroundColor: SECONDARY, borderRadius: 10, paddingVertical: 12, paddingHorizontal: 16, marginTop: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <MaterialIcons name="engineering" size={18} color="#fff" />
+              <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold', marginLeft: 8 }}>
+                {complaint.worker_id ? 'Reassign Worker' : 'Assign Worker'}
+              </Text>
+            </TouchableOpacity>
+          )}
+          {role === 'admin' && complaint.status === 'in_progress' && (
+            <TouchableOpacity 
+              onPress={handleResolve}
+              style={{ backgroundColor: SUCCESS, borderRadius: 10, paddingVertical: 12, paddingHorizontal: 16, marginTop: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <MaterialIcons name="check-circle" size={18} color="#fff" />
+              <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold', marginLeft: 8 }}>Resolve Problem</Text>
+            </TouchableOpacity>
           )}
         </View>
         {/* Local Authority Details */}
@@ -143,6 +190,7 @@ export default function ComplaintDetailScreen({ navigation, route }) {
             </View>
           </View>
         )}
+
         {/* Timeline */}
         <Text style={{ color: TEXT, fontSize: 16, fontWeight: 'bold', marginBottom: 14 }}>Timeline</Text>
         {timeline.map((event, i) => (
@@ -181,6 +229,50 @@ export default function ComplaintDetailScreen({ navigation, route }) {
           </View>
         )}
       </ScrollView>
+
+      {/* Worker Selection Modal */}
+      <Modal visible={showAssignModal} transparent animationType="slide" onRequestClose={() => setShowAssignModal(false)}>
+        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'flex-end' }}>
+          <View style={{ backgroundColor: BG, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: '80%' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+              <Text style={{ color: TEXT, fontSize: 18, fontWeight: 'bold' }}>Assign Worker</Text>
+              <TouchableOpacity onPress={() => setShowAssignModal(false)}>
+                <MaterialIcons name="close" size={24} color={TEXT2} />
+              </TouchableOpacity>
+            </View>
+            <Text style={{ color: TEXT2, fontSize: 14, marginBottom: 20 }}>Select an available worker for this task.</Text>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {allWorkers.map(w => (
+                <TouchableOpacity 
+                  key={w.id} 
+                  onPress={() => handleAssign(w.id)}
+                  style={{ 
+                    backgroundColor: CARD, borderRadius: 14, padding: 14, marginBottom: 12, 
+                    borderWidth: 1, borderColor: complaint.worker_id === w.id ? SECONDARY : BORDER,
+                    flexDirection: 'row', alignItems: 'center'
+                  }}
+                >
+                  <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: (w.active ? SUCCESS : TEXT2) + '22', justifyContent: 'center', alignItems: 'center', marginRight: 14 }}>
+                    <MaterialIcons name="engineering" size={22} color={w.active ? SUCCESS : TEXT2} />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={{ color: TEXT, fontSize: 15, fontWeight: '600' }}>{w.name}</Text>
+                    <Text style={{ color: TEXT2, fontSize: 12 }}>{w.dept} · {w.completed || 0} resolved</Text>
+                  </View>
+                  {!w.active && (
+                    <View style={{ backgroundColor: TEXT2 + '22', borderRadius: 6, paddingHorizontal: 8, paddingVertical: 3 }}>
+                      <Text style={{ color: TEXT2, fontSize: 10 }}>Busy</Text>
+                    </View>
+                  )}
+                  {complaint.worker_id === w.id && (
+                    <MaterialIcons name="check-circle" size={20} color={SECONDARY} />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
