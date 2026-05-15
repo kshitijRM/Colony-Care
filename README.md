@@ -161,6 +161,6 @@ Licensed under the **MIT License** — see [LICENSE](./LICENSE) for details.
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&animation=fadeIn" width="100%"/>
 
-*Made with ❤️ by Team Alpha-Z · If this helped you, drop a ⭐!*
+*Made with ❤️ by THE Debbuger's · If this helped you, drop a ⭐!*
 
 </div>
